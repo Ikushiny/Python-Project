@@ -1,0 +1,11 @@
+import random
+player = int(input('Rock! Paper! Scissors!: 0--Rock，1--Scissors，2--Paper:'))
+computer = random.randint(0,2)
+print(computer)
+
+if (player == 0 and computer == 1) or (player == 1 and computer == 2) or (player == 2 and computer == 0):
+    print('Player's Win')
+elif player == computer:
+    print('Tie')
+else:
+    print('Computer's Win')
