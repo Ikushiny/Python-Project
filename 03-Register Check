@@ -1,0 +1,6 @@
+name_list = ['tom', 'lily', 'rose']
+name = input('Please enter your name: ')
+if name in name_list:
+    print(f'{name} has existed')
+else:
+    print(f'your name is {name}, please register')
