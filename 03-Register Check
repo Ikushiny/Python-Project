@@ -1,4 +1,4 @@
-name_list = ['tom', 'lily', 'rose']
+name_list = ['Alex', 'Brian', 'Paul']
 name = input('Please enter your name: ')
 if name in name_list:
     print(f'{name} has existed')
