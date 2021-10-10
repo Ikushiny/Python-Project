@@ -1,0 +1,16 @@
+import random
+
+teachers = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
+offices = [[], [], []]
+
+for name in teachers:
+    num = random.randint(0, 2)
+    offices[num].append(name)
+print(offices)
+
+i = 1
+for each_office in offices:
+    print(f'the number of people in the {i} office is {len(each_office)}, and the teachers are: ')
+    for name in each_office:
+        print(name)
+    i += 1
