@@ -1,0 +1,13 @@
+def atm_func():
+    print('Account Statement')
+    print('Deposit')
+    print('Withdrawal') 
+
+print('Successful login')
+atm_func()
+
+print('Your balance is 1000 NTD')
+atm_func()
+
+print('Withdrawing 100 NTD')
+atm_func()
