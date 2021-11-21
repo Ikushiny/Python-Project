@@ -1,0 +1,115 @@
+def ui_info():
+    print('Please choose the function below:')
+    print('1. adding student info')
+    print('2. deleting student info')
+    print('3. amending student info')
+    print('4. searching student info')
+    print('5. showing all the student info')
+    print('6. withdrawal')
+    print('-'*70)
+
+info = []
+
+    
+def add_info():
+
+    '''Adding student info'''
+    new_id = input('Please enter the students id:')
+    new_name = input('Please enter the students name:')
+    new_tel = input('Please enter the phone number:')
+
+    '''If the name is in the list, report an error'''
+    global info  
+    for i in info:
+        if new_name == i['name']:
+            print('The name is already in the list')
+            return 
+
+    '''If the name is not in the list, add in'''
+    info_dict = {}
+    info_dict['id'] = new_id
+    info_dict['name'] = new_name
+    info_dict['tel'] = new_tel
+    info.append(info_dict)
+    print(info)
+
+
+def delete_info():
+
+    '''Delete student info'''
+    del_name = input('Please enter the students name:')
+
+    '''If the student is in the list, delete the info'''
+    global info 
+    for i in info:
+        if del_name == i['name']:
+            info.remove(i)
+            break
+    else: 
+        print('The student is not in the list')
+
+
+def amend_info():
+
+    '''Amend student info'''
+    amn_name = input('Please enter the students name:')
+
+    '''If the student is in the list, amend the telephone number'''
+    global info
+    for i in info:
+        if amn_name == i['name']:
+            i['tel'] = input('please enter new phone number: ')
+            break
+    else:
+        print('The student is not in the list')
+
+
+def search_info():
+
+    '''Search student info'''
+    search_name = input('Please enter the students name:')
+
+    '''If the student is in the list, list the student information'''
+    global info
+    for i in info:
+        if search_name == i['name']:
+            print('The student information is listed below --------------')
+            print(f"The student's id is {i['id']}, name is {i['name']}, and phone number is {i['tel']}")
+            break
+    else:
+        print('The student is not in the list')
+
+
+def print_all_info():
+
+    '''Show all student info'''
+    input('Id\tName\tPhone Number')
+
+    for i in info:
+        print(f"{i['id']}, {i['name']}, {i['tel']}")
+
+
+while True: 
+
+    ui_info()
+
+    # 2. User Input
+    user_num = int(input('Please in the number: '))
+
+    # 3. System Output
+    if user_num == 1:
+        add_info()
+    elif user_num == 2:
+        delete_info()
+    elif user_num == 3:
+        amend_info()
+    elif user_num == 4:
+        search_info()
+    elif user_num == 5:
+        print_all_info()
+    elif user_num == 6:
+        exit_flag = input('Would you like to withdraw, please enter Yes or No:  ')
+        if exit_flag == 'Yes':
+            break 
+    else:
+        print('Please enter the number between 1 to 6')
