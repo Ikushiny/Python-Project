@@ -1,0 +1,37 @@
+# 1. Entering the document's name: sound.txt
+ori_file = input("please enter the name of the document: ")
+# print(ori_file)
+# print(type(ori_file))
+
+# 2. Deciding the name of the backup (.txt)
+## By seeking the ".", we can separate the file name and suffix
+index = ori_file.rfind('.')
+# print(index)
+
+## If the document is effective (.txt)
+if index > 0:
+    new_suffix = ori_file[index:]
+
+## The new name: original name + [backup] + suffix
+subtract1 = ori_file[:index]
+subtract2 = ori_file[index:]
+# new_file = subtract1 + '[backup]' + subtract2
+new_file = subtract1 + '[backup]' + new_suffix
+print(new_file)
+
+# 3. Constructing the backup and enter the data (the data should be as same as the profile)
+## open (original/new)
+ori_f = open(ori_file, 'rb')
+new_f = open(new_file, 'wb')
+
+## read the original and write the new
+while True:
+    con = ori_f.read(1024)
+    if len(con) == 0:
+        break
+
+    new_f.write(con)
+
+## close
+ori_f.close()
+new_f.close()
