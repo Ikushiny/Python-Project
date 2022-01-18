@@ -1,0 +1,26 @@
+"""
+I.  Rename the files in the Python Project
+II. Delete "Python_" and rename the files
+"""
+
+# 1. Set up the condition
+flag = 2
+
+# 2. Find all the files and
+import os
+
+file_list = os.listdir()
+print(file_list)
+
+# 3. Decide the names(Python_XXXX)
+for i in file_list:
+    if flag == 1:
+        # new_name = 'Python_' + the file's name
+        new_name = 'Python_' + i
+    elif flag == 2:
+        # delete 'Python_'
+        num = len('Python_')
+        new_name = i[num:]
+
+# 3. Rename
+    os.rename(i, new_name)
