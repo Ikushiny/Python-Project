@@ -1,0 +1,33 @@
+# Requirement: Wash Machine
+
+# 1. Define the class of "Wash Machine"
+class WashMachine(): # Upper Camel Case is needed
+    def wash(self):
+        print("do the laundry")
+        print(self) # self = object_WM
+    # Obtain the attributes of the objects //From the inside//
+    def print_info(self):
+        print(f"The width of the wash machine is {self.width}")
+        print(f"The height of the wash machine is {self.height}")
+
+
+# 2. Construct the objects
+object_WM = WashMachine()
+object_WM2 = WashMachine()
+## 2.1 Add the attributes to the objects
+object_WM.width = 400
+object_WM.height = 500
+## 2.2 The inside attributes transfering(self.attribute)
+object_WM.print_info()
+
+
+# 3. Check the outcome
+# 3.1 Print "object_WM"
+print(object_WM)
+print(object_WM2)
+# 3.2 Use "wash()" --- Object Method: Object.wash()
+object_WM.wash()
+object_WM2.wash() # Different objects (self) will have different addresses
+# 3.3 Obtain the attributes of the objects //From the outside//
+print(f"The width of the wash machine is {object_WM.width}")
+print(f"The height of the wash machine is {object_WM.height}")
