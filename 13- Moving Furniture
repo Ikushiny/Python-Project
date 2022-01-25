@@ -1,0 +1,59 @@
+'''Moving Furniture'''
+
+# 1. Define the class
+class Furniture():
+    def __init__(self, name, space):
+        self.name = name
+        self.space = space
+
+class House():
+    def __init__(self, address, area):
+        # The address
+        self.address = address
+        # The area
+        self.area = area
+        # The area left
+        self.area_left = area
+        # The furniture list
+        self.furniture = []
+
+    def add_furnitures(self, item):
+        # Adding furnitures
+        if item.space <= self.area_left: # In the class House()
+            self.furniture.append(item.name)
+            self.area_left -= item.space
+        else:
+            print('The furniture is too large')
+
+    def __str__(self):
+        return f'The address of the house is {self.address}, the area is {self.area}, the area left is {self.area_left}, and the furnitures contain {self.furniture}.'
+
+
+# 2. Construct the object and use the corresponding object methods
+
+'''Accepted Case'''
+
+# Full Size Bed (6 square meter)
+bed = Furniture('Full Size Bed', 6)
+
+# House 1: In Taipei, 1000 square meter
+house_1 = House('Taipei', 1000)
+print(house_1)
+
+# Adding the furniture to the house
+house_1.add_furnitures(bed)
+print(house_1)
+
+'''Rejected Case'''
+
+# Football Field (5000 square meter)
+field = Furniture('Football Field', 5000)
+
+# House 2: In Kaohsiung, 1000 square meter
+house_2 = House('Kaohsiung', 1000)
+print(house_2)
+
+# Adding the furniture to the house
+house_1.add_furnitures(field)
+
+print(house_2)
