@@ -1,4 +1,5 @@
 '''Baking Sweet Potato'''
+
 # 1. Define the class
 class SweetPotato():
     def __init__(self):
