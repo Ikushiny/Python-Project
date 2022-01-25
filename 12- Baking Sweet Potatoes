@@ -1,0 +1,46 @@
+'''Baking Sweet Potato'''
+# 1. Define the class
+class SweetPotato():
+    def __init__(self):
+        # Cook Time
+        self.cook_time = 0
+        # Cook Status
+        self.cook_status = 'raw'
+        # Condiments
+        self.condiments = []
+
+    def cook(self, time):
+        '''To Cook Sweet Potato'''
+        # The total cooking time
+        self.cook_time += time
+        # Deciding the status by the cooking time
+        if 0 <= self.cook_time < 3:
+            self.cook_status = 'raw'
+        elif 3 <= self.cook_time < 5:
+            self.cook_status = 'half-cooked'
+        elif 5 <= self.cook_time < 8:
+            self.cook_status = 'well-done'
+        elif 8 <= self.cook_time:
+            self.cook_status = 'over-cooked'
+
+    def add_condi(self, the_condiment):
+        # Adding the condiments that customers like
+        self.condiments.append(the_condiment)
+
+    def __str__(self):
+        return f"the cooking time of the sweet potato is {self.cook_time}, and it is {self.cook_status} with {self.condiments}."
+
+# 2. Construct the object and use the corresponding object methods
+object_SP = SweetPotato()
+print(object_SP)
+# the cooking time of the sweet potato is 0, and it is raw.
+
+object_SP.cook(2)
+object_SP.add_condi('pepper')
+print(object_SP)
+# the cooking time of the sweet potato is 2, and it is raw.
+
+object_SP.cook(2)
+object_SP.add_condi('sugar')
+print(object_SP)
+# the cooking time of the sweet potato is 4, and it is half-cooked.
