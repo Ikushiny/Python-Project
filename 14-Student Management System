@@ -1,0 +1,156 @@
+# 1. Import the management system module
+from manageSystem import *
+
+# 2. Activating the management system
+# To ensure the system is activated in this 'workingEnvironment'
+if __name__ == '__main__':
+    student_manage = StudentMangement()
+    student_manage.run()
+
+class Student(object):
+    def __init__(self, name, gender, phone_num):
+        self.name = name
+        self.gender = gender
+        self.phone_num = phone_num
+
+    def __str__(self):
+        return f'{self.name}, {self.gender}, {self.phone_num}'
+
+from student import *
+class StudentMangement(object):
+    def __init__(self):
+        # Save the student information -- By constructing a list
+        self.student_list = []
+
+    # <System Entry Function>
+    def run(self):
+        # 1. Loading the student information in the file
+        self.load_student()
+        while True: # Building reversible loop
+            # 2. Showing function menu
+            self.show_menu()
+            # 3. Users entering function numbers
+            menu_num = int(input('Please enter the number: '))
+            # 4. Process the function according the number entered
+            if menu_num == 1:
+                # Adding students
+                self.add_student()
+            elif menu_num == 2:
+                # Deleting students
+                self.delete_student()
+            elif menu_num == 3:
+                # Modifying student information
+                self.modify_student()
+            elif menu_num == 4:
+                # Searching student information
+                self.search_student()
+            elif menu_num == 5:
+                # Displaying all student information
+                self.show_student()
+            elif menu_num == 6:
+                # Saving student information
+                self.save_student()
+            elif menu_num == 7:
+                break # Logging out
+
+    # <System Features Function>
+    # 1. Displaying the menu -- Printing out the options and content (staticmethod)
+    @staticmethod
+    def show_menu():
+        print('Please choose the ensuing options: ')
+        print('1. Adding Students')
+        print('2. Deleting Students')
+        print('3. Modifying Student Information')
+        print('4. Searching Student Information')
+        print('5. Showing all student information')
+        print('6. Saving Student Information')
+        print('7. Logging Out')
+
+    # 2. Adding Students
+    def add_student(self):
+        # 1. Allowing users to enter student names, genders, and phone numbers
+        name = input('PLease enter the name: ')
+        gander = input('Please enter the gender: ')
+        phone_num = input('Please the phone number: ')
+        # 2. To construct the student object --
+        # CLass(in the student file), import the student module first, and then construct the object.
+        student_added = Student(name, gander, phone_num)
+        # 3. Adding student to the student list
+        self.student_list.append(student_added)
+
+    # 3. Deleting Students
+    def delete_student(self):
+        # 1. Allowing users to enter student names
+        del_name = input('Please enter the name that you want to delete: ')
+        # 2. Scanning the student list
+        # If the student exists, delete the information, otherwise print out "Information Unavailable!"
+        for k in self.student_list:
+            if del_name == k.name:
+                self.student_list.remove(k)
+                break
+        else:
+            print('Information Unavailable!')
+
+    # 4. Modifying Student Information
+    def modify_student(self):
+        # 1. Allowing users to enter student names
+        modify_info = input('Please enter the name that you want to modify: ')
+        # 2. Scanning the student list
+        # If the student exists, modify the information, otherwise print out "Information Unavailable!"
+        for k in self.student_list:
+            if modify_info == k.name:
+                k.name = input('Renew the name: ')
+                k.gender = input('Renew the gender: ')
+                k.phone_num = input('Renew the phone number: ')
+                print(f'Successful Modification. The name is {k.name}, the gender is {k.gender}, and the phone number is {k.phone_num}')
+                break
+        else:
+                print('Information Unavailable!')
+
+    # 5. Searching Student Information
+    def search_student(self):
+        # 1. Allowing users to enter student names
+        search_info = input('Please enter the name that you want to search: ')
+        # 2. Scanning the student list
+        # If the student exists, print out the information, otherwise print out "Information Unavailable!"
+        for k in self.student_list:
+            if search_info == k.name:
+                print(f'The student name is {k.name}, the gender is {k.gender}, and the phone number is {k.phone_num}')
+        else:
+            print('Information Unavailable!')
+
+    # 6. Showing All Student Information
+    def show_student(self):
+        # 1. Header output
+        print('Name\tGender\tPhone Number')
+        # 2. print out the information
+        for i in self.student_list:
+            print(f'{i.name}\t{i.gender}\t{i.phone_num}')
+
+    # 7. Saving Student Information
+    def save_student(self):
+        # 1. Opening the file
+        f = open('student.data','w')
+        # 2. Entering the data
+        # 2.1 Turning [student] into [dict]
+        new_list = [i.__dict__ for i in self.student_list]
+        # 2.2 Entering the data in str
+        f.write(str(new_list))
+        # 3. Close the file
+        f.close()
+
+    # 8. Loading the student info in the file
+    def load_student(self):
+        # 1. Opening the file: with 'r', otherwise 'w'
+        try:
+            c = open('student.data', 'r')
+        except:
+            c = open('student.data', 'w')
+        else:
+            data = c.read() # str
+            # 2. Entering the data: return to the initial form of data
+            new_list = eval(data)
+            self.student_list = [Student(i['name'], i['gender'], i['phone_num']) for i in new_list]
+        # 3. Close the file
+        finally:
+            c.close()
