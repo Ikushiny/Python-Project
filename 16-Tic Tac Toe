@@ -1,0 +1,114 @@
+counter = 0
+row_1 = [' ', ' ', ' ']
+row_2 = [' ', ' ', ' ']
+row_3 = [' ', ' ', ' ']
+def display(row_1,row_2,row_3):
+    print(row_1)
+    print(row_2)
+    print(row_3)
+def user_input():
+    choice = input('Please enter a number from 1 to 9: ')
+    # no digit or not within i to 9
+    while (not choice.isdigit()) or (int(choice) not in range(1,10)):
+        if not choice.isdigit():
+            print('The choice is not valid.')
+        elif int(choice) not in range(1,10):
+            print('The choice is not in the range.')
+        choice = input('Please enter a number from 1 to 9: ')
+    return int(choice)
+def getCurrentSymbol():
+    global  counter
+    symbol_list = ['X','O']
+    counter += 1
+    return symbol_list[counter % 2]
+def update_table(index):
+    global row_1, row_2, row_3
+    if index in range(1,4):
+        if row_1[index-1] == ' ':
+            row_1[index-1] = getCurrentSymbol()
+            return True
+        else:
+            return False
+    elif index in range(4,7):
+        if row_2[index % 4] == ' ':
+            row_2[index % 4] = getCurrentSymbol()
+            return True
+        else:
+            return False
+    elif index in range(7,10):
+        if row_3[index % 7] == ' ':
+            row_3[index % 7] = getCurrentSymbol()
+            return True
+        else:
+            return False
+def check_wins():
+    player_1_wins = False
+    player_2_wins = False
+    if (row_1[0]==row_1[1]==row_1[2]) and (row_1[0]==row_1[1]==row_1[2] != ' '):
+        if row_1[0]=='O':
+            player_1_wins = True
+        else:
+            player_2_wins = True
+    elif (row_2[0]==row_2[1]==row_2[2]) and (row_2[0]==row_2[1]==row_2[2]!=' '):
+        if row_2[0]=='O':
+            player_1_wins = True
+        else:
+            player_2_wins = True
+    elif (row_3[0]==row_3[1]==row_3[2]) and (row_3[0]==row_3[1]==row_3[2]!=' '):
+        if row_3[0]=='O':
+            player_1_wins = True
+        else:
+            player_2_wins = True
+    elif (row_1[0]==row_2[0]==row_3[0]) and (row_1[0]==row_2[0]==row_3[0]!=' '):
+        if row_1[0]=='O':
+            player_1_wins = True
+        else:
+            player_2_wins = True
+    elif (row_1[1]==row_2[1]==row_3[1]) and (row_1[1]==row_2[1]==row_3[1]!=' '):
+        if row_1[1]=='O':
+            player_1_wins = True
+        else:
+            player_2_wins = True
+    elif (row_1[2]==row_2[2]==row_3[2]) and (row_1[2]==row_2[2]==row_3[2]!=' '):
+        if row_1[2]=='O':
+            player_1_wins = True
+        else:
+            player_2_wins = True
+    elif (row_1[0]==row_2[1]==row_3[2]) and (row_1[0]==row_2[1]==row_3[2]!=' '):
+        if row_1[0]=='O':
+            player_1_wins = True
+        else:
+            player_2_wins = True
+    elif (row_3[0]==row_2[1]==row_1[2]) and (row_3[0]==row_2[1]==row_1[2]!=' '):
+        if row_3[0]=='O':
+            player_1_wins = True
+        else:
+            player_2_wins = True
+
+    if player_1_wins:
+        return 'Player 1 wins'
+    elif player_2_wins:
+        return 'Player 2 wins'
+    else:
+        return 'No winners'
+def start_game():
+    while True:
+        print('----------------------------')
+        display(row_1, row_2, row_3)
+        print('----------------------------')
+        while True:
+            number = user_input()
+            if update_table(number):
+                break
+            else:
+                print('wrong position')
+        result = check_wins()
+        if result == 'Player 1 wins':
+            display(row_1, row_2, row_3)
+            print('Player 1 wins')
+            return
+        elif result == 'Player 2 wins':
+            display(row_1, row_2, row_3)
+            print('Player 2 wins')
+            return
+start_game()
